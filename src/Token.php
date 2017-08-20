@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 class Token
 {
     /**
-     * Create a new Unique Token.
+     * Create a new Unique Token..
      *
      * @return string
      */

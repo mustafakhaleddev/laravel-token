@@ -1,0 +1,39 @@
+{
+    "name": "dirape/token",
+    "description": "Unique Token Generator For Laravel",
+
+    "authors": [
+        {
+            "name": "MustafaKhaled",
+            "email": "MustafaKhaled.dev@gmail.com"
+        }
+    ],
+    "keywords": ["laravel", "token", "generate", "token generator", "unique token", "laravel token", "php token"],
+    "license": "MIT",
+      "require": {
+        "php": ">=5.4.0",
+                  "illuminate/support": "~5.0 || ~4.0"
+
+    },
+    "autoload": {
+        "psr-4": {
+            "Dirape\\Token\\": "src/"
+        }
+    },
+    
+      "extra": {
+       
+        "laravel": {
+            "providers": [
+
+                "Dirape\\Token\\TokenServiceProvider"
+            ],
+            "aliases": {
+                "Token":"Dirape\\Token\\Facades\\Facade"
+            }
+        }
+    },
+"minimum-stability" : "stable"
+
+
+}

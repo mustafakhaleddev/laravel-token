@@ -7,13 +7,17 @@ use Illuminate\Support\Facades\DB;
 
 class Token
 {
+
+
+
     /**
-     * Create a new Unique Token..
+     * Create a new Unique Token.
      *
      * @return string
      */
     public function Unique($table, $col, $size, $special = false)
     {
+
         $this->SpecialCharacter = $special;
         Do {
 

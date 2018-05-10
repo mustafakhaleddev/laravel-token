@@ -6,6 +6,7 @@ use Illuminate\Support\ServiceProvider;
 
 class TokenServiceProvider extends ServiceProvider
 {
+
     /**
      * Bootstrap the application services.
      *
@@ -13,7 +14,12 @@ class TokenServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        define('DT_Unique',  'Unique');
+        define('DT_UniqueNum',  'UniqueNumber');
+        define('DT_UniqueStr',  'UniqueString');
+        define('DT_Random',  'Random');
+        define('DT_RandomNum',  'RandomNumber');
+        define('DT_RandomStr',  'RandomString');
     }
 
     /**

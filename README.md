@@ -31,6 +31,80 @@ If you want you can use the [facade](http://laravel.com/docs/facades). Add the r
 
 ## Documentation
 
+### ★ New Token Trait ★
+##### setup in model
+To use new trait token you need to do some changes in the model that contain the token column.
+##### One Column Token
+  ######One token Trait allow you to generate token for one columns in the  table
+
+* To use one column token you need to add `` use DirapeToken;`` in the model .
+* In database we use default column called ``dt_token`` to replace with your column name add  ``  protected $DT_Column='column_name';`` in the model .
+* Token settings are set by default to this value `` ['type' => DT_Unique, 'size' => 40, 'special_chr' => false]`` to replace with your custom settings add  ``    protected $DT_settings=['type'=>DT_Unique,'size'=>60,'special_chr'=>false]; `` in the model .
+* you should know that we use custom constants for our token type
+```php
+  Const DT_Unique = 'Unique'; 
+  Const DT_UniqueNum = 'UniqueNumber'; 
+  Const DT_UniqueStr = 'UniqueString';
+  Const DT_Random = 'Random';
+  Const DT_RandomNum = 'RandomNumber';
+  Const DT_RandomStr = 'RandomString';
+  ``` 
+ * after preparing the model to use our trait token in your code you can set the token with your custom column and settings like this
+```php
+           $user=User::first();
+           $user->setToken();
+           $user->save();
+```
+* you can use your custom settings in ``setToken();`` function like this
+```php
+           $user=User::first();
+           $user->setToken(DT_UniqueStr,100,false);
+           $user->save();
+```
+* you can set your custom column in the function
+ ```php
+            $user=User::first();
+            $user->setToken(DT_UniqueStr,100,false,'column_name');
+            $user->save();
+ ```      
+* To get model query with token you can use `WithToken()` .
+       ```
+                  $user=User::WithToken()->get();
+       ```
+* To get model query with no tokens you can use flag ``false``  in `WithToken()`
+       ```
+                       $user=User::WithToken(false)->get();
+            ```
+##### Multi Column Token
+######Multi token allow you to generate tokens for multi columns in the same table
+  
+  * To use multi column token you need to add `` use DirapeMultiToken;`` in the model .
+  * Columns settings are not set by default so you need to make your custom settings in the model
+```php
+  protected $DMT_columns=[
+        'unique_id'=>['type'=>DT_Unique,'size'=>60,'special_chr'=>false],
+        'unique_uid'=>['type'=>DT_Unique,'size'=>30,'special_chr'=>false],
+    ];
+
+``` 
+* you should know that we use custom constants for our token type
+  ```php
+    Const DT_Unique = 'Unique'; 
+    Const DT_UniqueNum = 'UniqueNumber'; 
+    Const DT_UniqueStr = 'UniqueString';
+    Const DT_Random = 'Random';
+    Const DT_RandomNum = 'RandomNumber';
+    Const DT_RandomStr = 'RandomString';
+    ``` 
+   * after preparing the model to use our trait multi token in your code you can set the tokens with only one function
+  ```php
+             $user=User::first();
+             $user->setTokens();
+             $user->save();
+  ```
+    
+          
+### ★ The old way ★
 #### Generate unique token
 
 With this package you can generate unqiue token not repated in database just by using `unique($table_name,$column_name,$size)` Function  `$table_name` is the table name in database , `$column_name` is the column name in the table, `$size` is token size.

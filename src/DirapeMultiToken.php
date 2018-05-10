@@ -9,7 +9,7 @@ trait DirapeMultiToken
      * generate the token
      *
      * @param string $type
-     * @param strin $column
+     * @param string $column
      * @param integer $size
      * @param boolean $specialCharacter
      */

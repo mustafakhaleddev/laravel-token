@@ -35,7 +35,7 @@ If you want you can use the [facade](http://laravel.com/docs/facades). Add the r
 ##### setup in model
 To use new trait token you need to do some changes in the model that contain the token column.
 ##### One Column Token
-  ######One token Trait allow you to generate token for one columns in the  table
+  #####One token Trait allow you to generate token for one columns in the  table
 
 * To use one column token you need to add `` use DirapeToken;`` in the model .
 * In database we use default column called ``dt_token`` to replace with your column name add  ``  protected $DT_Column='column_name';`` in the model .
@@ -76,7 +76,7 @@ To use new trait token you need to do some changes in the model that contain the
                        $user=User::WithToken(false)->get();
             ```
 ##### Multi Column Token
-######Multi token allow you to generate tokens for multi columns in the same table
+#####Multi token allow you to generate tokens for multi columns in the same table
   
   * To use multi column token you need to add `` use DirapeMultiToken;`` in the model .
   * Columns settings are not set by default so you need to make your custom settings in the model

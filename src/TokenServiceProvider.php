@@ -6,7 +6,6 @@ use Illuminate\Support\ServiceProvider;
 
 class TokenServiceProvider extends ServiceProvider
 {
-
     /**
      * Bootstrap the application services.
      *
@@ -14,17 +13,15 @@ class TokenServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        if(!defined("DT_STARTED"))
-        {
-            define('DT_STARTED',  true);
-            define('DT_Unique',  'Unique');
-            define('DT_UniqueNum',  'UniqueNumber');
-            define('DT_UniqueStr',  'UniqueString');
-            define('DT_Random',  'Random');
-            define('DT_RandomNum',  'RandomNumber');
-            define('DT_RandomStr',  'RandomString');
+        if (! defined("DT_STARTED")) {
+            define('DT_STARTED', true);
+            define('DT_Unique', 'Unique');
+            define('DT_UniqueNum', 'UniqueNumber');
+            define('DT_UniqueStr', 'UniqueString');
+            define('DT_Random', 'Random');
+            define('DT_RandomNum', 'RandomNumber');
+            define('DT_RandomStr', 'RandomString');
         }
-
     }
 
     /**
@@ -34,7 +31,7 @@ class TokenServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind('Token',function(){
+        $this->app->bind('Token', function () {
             return new Token;
         });
     }

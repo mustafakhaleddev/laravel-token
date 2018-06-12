@@ -57,31 +57,30 @@ trait DirapeToken
         $token = new Token();
         $generated_token = null;
         switch ($this->DT_settings['type']) {
-            case DT_Unique:
-                $generated_token = $token->unique($table, $this->DT_Column, $this->DT_settings['size'], $this->DT_settings['special_chr']);
-                break;
-            case DT_UniqueNum:
+            case Token::UNIQUE_NUMBER:
                 $generated_token = $token->uniqueNumber($table, $this->DT_Column, $this->DT_settings['size'], $this->DT_settings['special_chr']);
 
                 break;
-            case DT_UniqueStr:
+            case Token::UNIQUE_STRING:
                 $generated_token = $token->uniqueString($table, $this->DT_Column, $this->DT_settings['size'], $this->DT_settings['special_chr']);
 
                 break;
-            case DT_Random:
+            case Token::RANDOM:
                 $generated_token = $token->random($this->DT_settings['size'], $this->DT_settings['special_chr']);
 
                 break;
-            case DT_RandomNum:
+            case Token::RANDOM_NUMBER:
                 $generated_token = $token->randomNumber($this->DT_settings['size'], $this->DT_settings['special_chr']);
 
                 break;
-            case DT_RandomStr:
+            case Token::RANDOM_STRING:
                 $generated_token = $token->randomString($this->DT_settings['size'], $this->DT_settings['special_chr']);
 
                 break;
+            case Token::UNIQUE:
             default:
-                $generated_token = $token->Unique($table, $this->DT_Column, $this->DT_settings['size'], $this->DT_settings['special_chr']);
+                $generated_token = $token->unique($table, $this->DT_Column, $this->DT_settings['size'], $this->DT_settings['special_chr']);
+
                 break;
         }
 
@@ -94,7 +93,6 @@ trait DirapeToken
      *
      * @param Builder $query
      * @param bool $flag
-     *
      * @return Builder
      */
     public function scopeWithToken($query, $flag = true)

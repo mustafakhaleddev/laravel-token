@@ -2,130 +2,146 @@
 
 namespace Dirape\Token;
 
-
 use Illuminate\Support\Facades\DB;
 
 class Token
 {
-
-
-
     /**
-     * Create a new Unique Token.
+     * Create a unique token.
      *
+     * @param string $table
+     * @param string $col
+     * @param integer $size
+     * @param bool $withSpecialCharacters
      * @return string
+     * @throws \Exception
      */
-    public function Unique($table, $col, $size, $special = false)
+    public function unique($table, $col, $size, $withSpecialCharacters = false)
     {
+        do {
+            $token = $this->random($size, $withSpecialCharacters);
 
-        $this->SpecialCharacter = $special;
-        Do {
+            $exists = DB::table($table)->where($col, $token)->exists();
+        } while ($exists);
 
-            $code = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-            $code .= "abcdefghijklmnopqrstuvwxyz";
-            $code .= "0123456789";
-            $token = $this->Generate($code, $size);
-            $t = DB::table($table)->where($col, $token)->first();
-
-        } while ($t);
         return $token;
     }
 
     /**
-     * Create a new Unique Integer Token.
+     * Create a unique number.
      *
+     * @param string $table
+     * @param string $column
+     * @param $size
+     * @param bool $withSpecialCharacters
      * @return integer
+     * @throws \Exception
      */
-    public function UniqueNumber($table, $col, $size, $special = false)
+    public function uniqueNumber($table, $column, $size, $withSpecialCharacters = false)
     {
-        $this->SpecialCharacter = $special;
-        Do {
-            $code = "0123456789";
-            $token = $this->Generate($code, $size);
-            $t = DB::table($table)->where($col, $token)->first();
+        do {
+            $token = $this->randomNumber($size, $withSpecialCharacters);
 
-        } while ($t);
+            $exists = DB::table($table)->where($column, $token)->exists();
+        } while ($exists);
+
         return $token;
     }
 
     /**
-     * Create a new Unique String Token.
+     * Create a unique string.
      *
+     * @param string $table
+     * @param string $column
+     * @param int $size
+     * @param bool $withSpecialCharacters
      * @return string
+     * @throws \Exception
      */
-    public function UniqueString($table, $col, $size, $special = false)
+    public function uniqueString($table, $column, $size, $withSpecialCharacters = false)
     {
-        $this->SpecialCharacter = $special;
-        Do {
-            $code = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-            $code .= "abcdefghijklmnopqrstuvwxyz";
-            $token = $this->Generate($code, $size);
-            $t = DB::table($table)->where($col, $token)->first();
+        do {
+            $token = $this->randomString($size, $withSpecialCharacters);
 
-        } while ($t);
+            $exists = DB::table($table)->where($column, $token)->exists();
+        } while ($exists);
+
         return $token;
     }
 
     /**
-     * Create a new Random Token.
+     * Create a random token.
      *
+     * @param int $size
+     * @param bool $withSpecialCharacters
      * @return string
+     * @throws \Exception
      */
-    public function Random($size, $special = false)
+    public function random($size, $withSpecialCharacters = false)
     {
-        $this->SpecialCharacter = $special;
         $code = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         $code .= "abcdefghijklmnopqrstuvwxyz";
         $code .= "0123456789";
-        $token = $this->Generate($code, $size);
+
+        $token = $this->generate($code, $size, $withSpecialCharacters);
+
         return $token;
     }
 
     /**
-     * Create a new Random Number Token.
+     * Create a random number.
      *
+     * @param int $size
+     * @param bool $withSpecialCharacters
      * @return string
+     * @throws \Exception
      */
-    public function RandomNumber($size, $special = false)
+    public function randomNumber($size, $withSpecialCharacters = false)
     {
-        $this->SpecialCharacter = $special;
-
         $code = "0123456789";
-        $token = $this->Generate($code, $size);
+        $token = $this->generate($code, $size, $withSpecialCharacters);
+
         return $token;
     }
 
     /**
-     * Create a new Random Number Token.
+     * Create a random string.
      *
+     * @param int $size
+     * @param bool $withSpecialCharacters
      * @return string
+     * @throws \Exception
      */
-    public function RandomString($size, $special = false)
+    public function randomString($size, $withSpecialCharacters = false)
     {
-        $this->SpecialCharacter = $special;
-
         $code = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         $code .= "abcdefghijklmnopqrstuvwxyz";
-        $token = $this->Generate($code, $size);
+        $token = $this->generate($code, $size, $withSpecialCharacters);
+
         return $token;
     }
 
     /**
-     * Generate The Token.
+     * Generate a random token.
      *
+     * @param string $characters
+     * @param int $size
+     * @param bool $withSpecialCharacters
      * @return string
+     * @throws \Exception
      */
-    private function Generate($code, $size)
+    private function generate($characters, $size, $withSpecialCharacters = false)
     {
-        if ($this->SpecialCharacter) {
-            $code .= '!@#$%^&*()';
+        if ($withSpecialCharacters) {
+            $characters .= '!@#$%^&*()';
         }
+
         $token = '';
-        $max = strlen($code);
+        $max = strlen($characters);
         for ($i = 0; $i < $size; $i++) {
-            $token .= $code[random_int(0, $max - 1)];
+            $token .= $characters[random_int(0, $max - 1)];
         }
+
         return $token;
     }
-
 }

@@ -1,10 +1,9 @@
 <?php
-namespace Dirape\Token\Facades;
 
+namespace Dirape\Token\Facades;
 
 class Facade extends \Illuminate\Support\Facades\Facade
 {
-
     /**
      * Get the registered name of the component.
      *
@@ -14,5 +13,4 @@ class Facade extends \Illuminate\Support\Facades\Facade
     {
         return 'Token';
     }
-
 }

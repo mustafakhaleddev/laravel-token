@@ -2,7 +2,7 @@
 
 namespace Dirape\Token;
 
-use MongoDB\Driver\Query;
+use Illuminate\Database\Eloquent\Builder;
 
 trait DirapeToken
 {
@@ -90,11 +90,12 @@ trait DirapeToken
     }
 
     /**
-     * Scope with token query.
+     * Scope with token query
      *
-     * @param $query
+     * @param Builder $query
      * @param bool $flag
-     * @return Query
+     *
+     * @return Builder
      */
     public function scopeWithToken($query, $flag = true)
     {

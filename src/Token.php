@@ -7,6 +7,16 @@ use Illuminate\Support\Facades\DB;
 class Token
 {
     /**
+     * Methods.
+     */
+    const UNIQUE = 'Unique';
+    const UNIQUE_NUMBER = 'UniqueNumber';
+    const UNIQUE_STRING = 'UniqueString';
+    const RANDOM = 'Random';
+    const RANDOM_NUMBER = 'RandomNumber';
+    const RANDOM_STRING = 'RandomString';
+
+    /**
      * Create a unique token.
      *
      * @param string $table

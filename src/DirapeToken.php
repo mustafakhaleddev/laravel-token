@@ -54,15 +54,16 @@ trait DirapeToken
             $this->attributes['DT_settings']['special_chr'] = $specialCharacter;
         }
         $table = $this->getTable();
+        $connection = $this->getConnectionName();
         $token = new Token();
         $generated_token = null;
         switch ($this->DT_settings['type']) {
             case Token::UNIQUE_NUMBER:
-                $generated_token = $token->uniqueNumber($table, $this->DT_Column, $this->DT_settings['size'], $this->DT_settings['special_chr']);
+                $generated_token = $token->uniqueNumber($table, $this->DT_Column, $this->DT_settings['size'], $this->DT_settings['special_chr'], $connection);
 
                 break;
             case Token::UNIQUE_STRING:
-                $generated_token = $token->uniqueString($table, $this->DT_Column, $this->DT_settings['size'], $this->DT_settings['special_chr']);
+                $generated_token = $token->uniqueString($table, $this->DT_Column, $this->DT_settings['size'], $this->DT_settings['special_chr'], $connection);
 
                 break;
             case Token::RANDOM:
@@ -79,7 +80,7 @@ trait DirapeToken
                 break;
             case Token::UNIQUE:
             default:
-                $generated_token = $token->unique($table, $this->DT_Column, $this->DT_settings['size'], $this->DT_settings['special_chr']);
+                $generated_token = $token->unique($table, $this->DT_Column, $this->DT_settings['size'], $this->DT_settings['special_chr'], $connection);
 
                 break;
         }

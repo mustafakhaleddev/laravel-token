@@ -26,7 +26,7 @@ class Token
      * @return string
      * @throws \Exception
      */
-    public function unique($table, $col, $size, $withSpecialCharacters = false)
+    public function unique($table, $col, $size, $withSpecialCharacters = false, $connection)
     {
         do {
             $token = $this->random($size, $withSpecialCharacters);
@@ -47,7 +47,7 @@ class Token
      * @return integer
      * @throws \Exception
      */
-    public function uniqueNumber($table, $column, $size, $withSpecialCharacters = false)
+    public function uniqueNumber($table, $column, $size, $withSpecialCharacters = false, $connection)
     {
         do {
             $token = $this->randomNumber($size, $withSpecialCharacters);
@@ -68,7 +68,7 @@ class Token
      * @return string
      * @throws \Exception
      */
-    public function uniqueString($table, $column, $size, $withSpecialCharacters = false)
+    public function uniqueString($table, $column, $size, $withSpecialCharacters = false, $connection)
     {
         do {
             $token = $this->randomString($size, $withSpecialCharacters);

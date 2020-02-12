@@ -31,7 +31,7 @@ class Token
         do {
             $token = $this->random($size, $withSpecialCharacters);
 
-            $exists = DB::table($table)->where($col, $token)->exists();
+            $exists = DB::connection($connection)->table($table)->where($col, $token)->exists();
         } while ($exists);
 
         return $token;
@@ -52,7 +52,7 @@ class Token
         do {
             $token = $this->randomNumber($size, $withSpecialCharacters);
 
-            $exists = DB::table($table)->where($column, $token)->exists();
+            $exists = DB::connection($connection)->table($table)->where($column, $token)->exists();
         } while ($exists);
 
         return $token;
@@ -73,7 +73,7 @@ class Token
         do {
             $token = $this->randomString($size, $withSpecialCharacters);
 
-            $exists = DB::table($table)->where($column, $token)->exists();
+            $exists = DB::connection($connection)->table($table)->where($column, $token)->exists();
         } while ($exists);
 
         return $token;

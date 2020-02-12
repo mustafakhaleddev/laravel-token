@@ -24,11 +24,11 @@ trait DirapeMultiToken
             $generated_token = null;
             switch ($settings['type']) {
                 case Token::UNIQUE_NUMBER:
-                    $generated_token = $token->uniqueNumber($table, $column, $settings['size'], $settings['special_chr'], $connection);
+                    $generated_token = $token->uniqueNumber($connection, $table, $column, $settings['size'], $settings['special_chr']);
 
                     break;
                 case Token::UNIQUE_STRING:
-                    $generated_token = $token->uniqueString($table, $column, $settings['size'], $settings['special_chr'], $connection);
+                    $generated_token = $token->uniqueString($connection, $table, $column, $settings['size'], $settings['special_chr']);
 
                     break;
                 case Token::RANDOM:
@@ -45,7 +45,7 @@ trait DirapeMultiToken
                     break;
                 case Token::UNIQUE:
                 default:
-                    $generated_token = $token->unique($table, $column, $settings['size'], $settings['special_chr'], $connection);
+                    $generated_token = $token->unique($connection, $table, $column, $settings['size'], $settings['special_chr']);
                     break;
             }
             $this->attributes[$column] = $generated_token;
